@@ -64,6 +64,10 @@ class MainProcess():
         
         with pd.ExcelWriter(file, engine="openpyxl", mode="w") as writer:
             # GPT
+            gpt_cols: list[str] = list(gpt.columns)
+            for col in gpt_cols:
+                if "占比" in col:
+                    gpt[col] = gpt[col].apply(lambda x: f"{x: .2%}")
             gpt.to_excel(writer, sheet_name="GPT", index=False)
             # 路由
             routing.to_excel(writer, sheet_name="路由", index=False)

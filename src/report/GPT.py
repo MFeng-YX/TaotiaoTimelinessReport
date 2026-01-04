@@ -72,7 +72,7 @@ class GPT():
         cal_cols: list[str] = list()
         for col in self.gpt["计算列"]:
             new_col = col[:-3] + "占比"
-            df_cal[new_col] = f'{df_cal[col] / df_cal['sum'] * 100: .2f}%'
+            df_cal[new_col] = df_cal[col] / df_cal['sum']
             cal_cols.append(col)
             cal_cols.append(new_col)
         
